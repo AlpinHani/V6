@@ -151,7 +151,7 @@ prep = conn.prepareMessageFromContent(m.chat, { orderMessage: {
 itemCount: 99999999, status: 1,
 message: '```BERHASIL```',
 orderTitle: 'B',
-sellerJid: '62895603352610@s.whatsapp.net',
+sellerJid: '62896255561617@s.whatsapp.net',
 thumbnail: await (await require('node-fetch')(imeg)).buffer(),
 }}, {contextInfo: null, quoted: m})
 conn.relayWAMessage(prep)
