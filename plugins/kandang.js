@@ -12,6 +12,7 @@ let sapi = global.DATABASE.data.users[m.sender].sapi
  let babihutan = global.DATABASE.data.users[m.sender].babihutan
  let babi = global.DATABASE.data.users[m.sender].babi
  let ayam = global.DATABASE.data.users[m.sender].ayam
+let wm = global.botwm
 
 let zer = `
 ╔════════════════════
@@ -31,7 +32,7 @@ let zer = `
 ║╰────────────────
 ╚════════════════════
  `.trim()
-     conn.reply(m.chat, zer, m)
+     conn.sendButton(m.chat, zer,wm, 'Toko', '.pasar', m)
 } 
 handler.help = ['kandang']
 handler.customPrefix = ['kandang']
