@@ -8,11 +8,11 @@ let handler = async (m, { conn, usedPrefix: _p, args, command, text }) => {
  // BAGIAN TAG
  let tag = `@${m.sender.split('@')[0]}`
  m, { contextInfo: { mentionedJid: conn.parseMention(tag) }}
- let ow = `@${'19592142111'.split('@')[0]}`
+ let ow = `@${'6289625556161'.split('@')[0]}`
  m, { contextInfo: { mentionedJid: conn.parseMention(tag) }}
- let pat1 = `@${'6283829756773'.split('@')[0]}`
+ let pat1 = `@${'62896255561613'.split('@')[0]}`
  m, { contextInfo: { mentionedJid: conn.parseMention(tag) }}
- let pat2 = `@${'6285693120588'.split('@')[0]}`
+ let pat2 = `@${'6282287750102'.split('@')[0]}`
  m, { contextInfo: { mentionedJid: conn.parseMention(tag) }}
  let pat3 = `@${'6282245731529'.split('@')[0]}`
  m, { contextInfo: { mentionedJid: conn.parseMention(tag) }}
@@ -31,17 +31,25 @@ const defaultMenu = {
 %me
 Hai, ${tag} 👋!
 
-Tersisa *%limit Limit*
-Role *%role*
-Level *%level (%exp / %maxexp)* [%xp4levelup]
-%totalexp XP secara Total
+❏ 𝙄𝙉𝙁𝙊 𝙐𝙎𝙀𝙍
+» Nama : ${name}
+${about != 401 ? '» Bio : ' + about : ''} 
+» Role : ${role}
+» Tag : ${tag}
+» Limit : ${limit} 
+» Premium : ${prem ? '✅' : '❌'}
 
 ❏ *T I M E*
 - Tanggal: *%week %weton, %date*
 - Tanggal Islam: *%dateIslamic*
 - Waktu: *%time*
 
-
+❏ *B O T  S T A T U S*
+- Mode: *${global.opts['self'] ? 'Private' : 'Publik'}*
+- Runtime: *%uptime (%muptime)*
+- Database: *%rtotalreg dari %totalreg*
+- Memory Used : *${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB*
+ 
 ❏ *C R E A T O R*
 - ${ow}
 
@@ -51,13 +59,9 @@ Level *%level (%exp / %maxexp)* [%xp4levelup]
 ❏ *P A R T N E R*
 - ${pat1}
 - ${pat2}
-- ${pat3}
-- ${pat4}
 
 ❏ *G I T H U B*
 _%github_
-❏ *I N S T A G R A M*
-https://instagram.com/johannes28_
 
 %readmore`.trimStart(),
   header: '❏ *%category*',
@@ -303,187 +307,46 @@ const ftroli = {
         enabled: !plugin.disabled,
       }
     })
-    if (teks == '404') {
-      return conn.relayWAMessage(conn.prepareMessageFromContent(m.chat, {
-        "listMessage": {
-          "title": `${ucapanWaktu} ${name} 👋
-          
-❏ 𝙄𝙉𝙁𝙊 𝙐𝙎𝙀𝙍
-» Nama : ${name}
-${about != 401 ? '» Bio : ' + about : ''} 
-» Tag : ${tag}
-» Limit : ${limit} 
-» Premium : ${prem ? '✅' : '❌'}
-
-❏ 𝙏𝙄𝙈𝙀
-» Wib : ${time}
-» Tanggal : ${week} ${weton} ${date}
-
-❏ 𝙏𝘼𝙃𝙐𝙉 𝘽𝘼𝙍𝙐
-_${jhari} Hari ${jjam} Jam ${mmmenit} Menit ${ddetik} Detik_
-
-❏ 𝙍𝘼𝙈𝘼𝘿𝘼𝙉
-_${harii} Hari ${jamm} Jam ${menitt} Menit ${detikk} Detik_
-
-❏ 𝙐𝙇𝘼𝙉𝙂 𝙏𝘼𝙃𝙐𝙉 𝙊𝙒𝙉𝙀𝙍
-_${ohari} Hari ${ojam} Jam ${onet} Menit ${detek} Detik_
-
-Note: Jika ada Fitur yg Error Lapor ke owner
-`.trim(),
-          "description": `\n*© ${conn.getName(conn.user.jid)} || 2021*`,
-          "buttonText": "Klik Disini",
-          "listType": "SINGLE_SELECT",
-          "sections": [
-            {
-              "rows": [
-                {
-                  "title": `Semua Perintah`,
-                  "description": "",
-                  "rowId": `${_p}? all`
-                }, {
-                  "title": "Epic Rpg",
-                  "description": "",
-                  "rowId": `${_p}? rpg`
-                }, {
-                  "title": "Game",
-                  "description": "",
-                  "rowId": `${_p}? game`
-
-                }, {
-                  "title": "XP",
-                  "description": "",
-                  "rowId": `${_p}? xp`
-                 
-                 }, {
-                  "title": "Anime",
-                  "description": "",
-                  "rowId": `${_p}? anime`
-                
-                }, {
-                  "title": "Hentai",
-                  "description": "",
-                  "rowId": `${_p}? dewasa`
-
-                }, {
-                  "title": "Stiker",
-                  "description": "",
-                  "rowId": `${_p}? stiker`
-                }, {
-                  "title": "Kerang Ajaib",
-                  "description": "",
-                  "rowId": `${_p}? kerangajaib`
-                }, {
-                  "title": "Quotes",
-                  "description": "",
-                  "rowId": `${_p}? quotes`
-                }, {
-                  "title": "Admin",
-                  "description": "",
-                  "rowId": `${_p}? admin`
-                }, {
-                  "title": "Grup",
-                  "description": "",
-                  "rowId": `${_p}? grup`
-                }, {
-                  "title": "Premium",
-                  "description": "",
-                  "rowId": `${_p}? premium`
-                }, {
-                  "title": "Internet",
-                  "description": "",
-                  "rowId": `${_p}? internet`
-                }, {
-                  "title": "Anonymous",
-                  "description": "",
-                  "rowId": `${_p}? anonymous`
-                }, {
-                  "title": "Nulis & Logo",
-                  "description": "",
-                  "rowId": `${_p}? nulis`
-                }, {
-                  "title": "Downloader",
-                  "description": "",
-                  "rowId": `${_p}? downloader`
-                }, {
-                  "title": "Tools",
-                  "description": "",
-                  "rowId": `${_p}? tools`
-                }, {
-                  "title": "Fun",
-                  "description": "",
-                  "rowId": `${_p}? fun`
-                }, {
-                  "title": "Database",
-                  "description": "",
-                  "rowId": `${_p}? database`
-                }, {
-                  "title": "Vote & Absen",
-                  "description": "",
-                  "rowId": `${_p}? vote`
-                }, {
-                  "title": "Al-Qur\'an",
-                  "description": "",
-                  "rowId": `${_p}? quran`
-                }, {
-                  "title": "Pengubah Suara",
-                  "description": "",
-                  "rowId": `${_p}? audio`
-                }, {
-                  "title": "Jadi Bot",
-                  "description": "",
-                  "rowId": `${_p}? jadibot`
-                }, {
-                  "title": "Info",
-                  "description": "",
-                  "rowId": `${_p}? info`
-                }, {
-                  "title": "Tanpa Kategori",
-                  "description": "",
-                  "rowId": `${_p}? tanpakategori`
-                }, {
-                  "title": "Owner",
-                  "description": "",
-                  "rowId": `${_p}? owner`
-               }, {
-                  "title": "Source code",
-                  "description": "",
-                  "rowId": `${_p}? sc`
-                }
-              ]
-            }
-          ]
-        }
-      }, {quoted: ftroli, contextInfo: { mentionedJid: conn.parseMention(tag) }}), { waitForAck: true })
-    }
-    // gunakan ini jika kamu menggunakan whatsapp bisnis
-    //   throw `
-    // ┌〔 DAFTAR MENU 〕
-    // ├ ${_p + command} all
-    // ├ ${_p + command} game
-    // ├ ${_p + command} xp
-    // ├ ${_p + command} stiker
-    // ├ ${_p + command} kerang
-    // ├ ${_p + command} quotes
-    // ├ ${_p + command} admin
-    // ├ ${_p + command} group
-    // ├ ${_p + command} premium
-    // ├ ${_p + command} internet
-    // ├ ${_p + command} anonymous
-    // ├ ${_p + command} nulis
-    // ├ ${_p + command} downloader
-    // ├ ${_p + command} tools
-    // ├ ${_p + command} fun
-    // ├ ${_p + command} database
-    // ├ ${_p + command} vote
-    // ├ ${_p + command} quran
-    // ├ ${_p + command} audio
-    // ├ ${_p + command} jadibot
-    // ├ ${_p + command} info
-    // ├ ${_p + command} tanpa kategori
-    // ├ ${_p + command} owner
-    // ├ ${_p + command} sc
-    // └────  
-    //     `.trim()
+    if (teks == '404') return conn.send2ButtonLoc(m.chat, await(await fetch(fla + 'menu')).buffer(), 
+`┏━━〔 Status 〕━
+┃❏ Runtime ${uptime}
+(${muptime})
+┃❏ *${Object.entries(global.db.data.chats).filter(chat => chat[1].isBanned).length}* Chat Terbanned
+┃❏ *${totaljadibot.length}* Jadibot
+┃❏ *${conn.blocklist.length}* Terblock
+┃❏ *${Object.keys(global.db.data.users).length}* Pengguna
+┃❏ *${Object.entries(global.db.data.users).filter(user => user[1].banned).length}* Pengguna Terbanned
+┃❏ *Database: ${rtotalreg} dari ${totalreg}*
+*└────•*
+ ${readMore}
+┌〔 DAFTAR MENU 〕─•
+├❏ ${_p + command} all
+├❏ ${_p + command} game
+├❏ ${_p + command} rpg 
+├❏ ${_p + command} jadian
+├❏ ${_p + command} xp
+├❏ ${_p + command} stiker
+├❏ ${_p + command} kerangajaib
+├❏ ${_p + command} photo
+├❏ ${_p + command} quotes
+├❏ ${_p + command} admin
+├❏ ${_p + command} grup
+├❏ ${_p + command} premium
+├❏ ${_p + command} internet
+├❏ ${_p + command} anonymous
+├❏ ${_p + command} nulis
+├❏ ${_p + command} downloader
+├❏ ${_p + command} tools
+├❏ ${_p + command} fun
+├❏ ${_p + command} database
+├❏ ${_p + command} vote
+├❏ ${_p + command} quran
+├❏ ${_p + command} audio
+├❏ ${_p + command} jadibot
+├❏ ${_p + command} info
+├❏ ${_p + command} tanpakategori
+├❏ ${_p + command} owner
+└────•`, 'ZeusBotz', 'Rules', '.rules', 'Owner', '.owner', m)
     let groups = {}
     for (let tag in tags) {
       groups[tag] = []
@@ -546,14 +409,14 @@ Note: Jika ada Fitur yg Error Lapor ke owner
             "fileLength": "99999999999999",
             "pageCount": 99999999999999,
             "mediaKey": "XWv4hcnpGY51qEVSO9+e+q6LYqPR3DbtT4iqS9yKhkI=",
-            "fileName": "Bot WhatsApp",
+            "fileName": "ZeusBotz",
             "fileEncSha256": "NI9ykWUcXKquea4BmH7GgzhMb3pAeqqwE+MTFbH/Wk8=",
             "directPath": "/v/t62.7118-24/35150115_287008086621545_8250021012380583765_n.enc?ccb=11-4&oh=6f0f730e5224c054969c276a6276a920&oe=61A21F46",
             "mediaKeyTimestamp": "1634472176",
             "jpegThumbnail": fs.readFileSync('./logo.jpg'),
   }}, 'buttonsMessage', { contextInfo: { mentionedJid: conn.parseMention(text), forwardingScore: 999, isForwarded: true, externalAdReply :{ sourceUrl: 'https://chat.whatsapp.com/DYbwxUvMEzTEsOuYQnBDm2',mediaType: 2,title: `${ucapanWaktu} ${name}`,body: `${week} ${date}`,thumbnail: global.image }}})  
   } catch (e) {
-    conn.reply(m.chat, 'Maaf, menu sedang error', m)
+   // conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
   }
 }
