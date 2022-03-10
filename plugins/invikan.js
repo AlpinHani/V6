@@ -12,6 +12,7 @@ let hiu = global.DATABASE._data.users[m.sender].hiu
 let udang = global.DATABASE._data.users[m.sender].udang
 let ikan = global.DATABASE._data.users[m.sender].ikan
 let orca = global.DATABASE._data.users[m.sender].orca
+let wm = global.botwm
 
 let zer = `
 *《 ISI KOLAM MU 》*
@@ -29,7 +30,7 @@ let zer = `
  *🐟 = [ ${ikan} ] Ekor Ikan*
  *🐳 = [ ${orca} ] Ekor Orca*   
  `.trim()
-     conn.reply(m.chat, zer, m)
+     conn.sendButton(m.chat, zer, `${wm}`, 'Pasar', '#pasar', m)
 } 
 handler.help = ['kolam']
 handler.customPrefix = ['kolam']
