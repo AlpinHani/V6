@@ -1,9 +1,9 @@
 let handler = async m => m.reply(`
 ┏━━⬣ 𝗗𝗢𝗡𝗔𝗦𝗜
 ┃
-┃⬡ TRI : 0895612153565
-┃⬡ GOPAY : 62895612153565
-┃⬡ DANA : 62895612153565
+┃⬡ TRI : 089625556161
+┃⬡ GOPAY : 6289625556161
+┃⬡ DANA : 6289625556161
 ┃⬡ SAWERIA : xxxxxxxx
 ┗⬣
 `.trim()) // Tambah sendiri kalo mau
