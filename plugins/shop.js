@@ -1,5 +1,6 @@
 let { MessageType } = require('@adiwajshing/baileys')
-const potion = 500
+const potion = 2000
+const stone = 500
 const Spotion = 150 
 const Bdiamond = 900
 const Sdiamond = 750
@@ -13,103 +14,123 @@ const Blegendary = 7500
 const Slegendary = 3000
 const Bsampah = 10
 const Ssampah = 2
+const Stone = 300
 let handler  = async (m, { conn, command, args, usedPrefix, DevMode }) => {
-    const _armor = global.DATABASE._data.users[m.sender].armor
+    const _armor = global.DATABASE.data.users[m.sender].armor
     const armor = (_armor == 0 ? 20000 : '' || _armor == 1 ? 49999 : '' || _armor == 2 ? 99999 : '' || _armor == 3 ? 149999 : '' || _armor == 4 ? 299999 : '')
     let type = (args[0] || '').toLowerCase()
     let _type = (args[1] || '').toLowerCase()
     let jualbeli = (args[0] || '').toLowerCase()
     const Kchat = `
-${usedPrefix}shop <Buy|sell> <item> <jumlah>\n
-Contoh penggunaan: *${usedPrefix}shop buy potion 1*\n\n
-List Barang:\n\n
-*Barang   |  Harga beli*\n
-Potion:       ${potion}
-Diamond:     ${Bdiamond}
-Common:     ${Bcommon}
-Uncommon:  ${Buncommon}
-Mythic:     ${Bmythic}
-Legendary: ${Blegendary}
-Sampah:     ${Bsampah}
-Armor:       ${armor}\n\n
-*Barang   | Harga Jual*\n
-Potion:       ${Spotion}
-Diamond:     ${Sdiamond}
-Common:     ${Scommon}
-Uncommon:  ${Suncommon}
-Mythic:     ${Smythic}
-Legendary: ${Slegendary}
-Sampah:     ${Ssampah}\n\n
+List Barang:\n\n━━━━━━━━━━━━━━━━━\n
+*Barang   |  Harga beli*\n━━━━━━━━━━━━━━━━━\n
+🍶Potion:       ${potion}
+💎Diamond:     ${Bdiamond}
+📦Common:     ${Bcommon}
+📦Uncommon:  ${Buncommon}
+🗽Mythic:     ${Bmythic}
+🎓Legendary: ${Blegendary}
+🗑️Sampah:     ${Bsampah}
+👕Armor:       ${armor}\n\n━━━━━━━━━━━━━━━━━\n
+*Barang   | Harga Jual*\n━━━━━━━━━━━━━━━━━\n
+🍶Potion:       ${Spotion}
+💎Diamond:     ${Sdiamond}
+📦Common:     ${Scommon}
+📦Uncommon:  ${Suncommon}
+🗽Mythic:     ${Smythic}
+🎓Legendary: ${Slegendary}
+🗑️Sampah:     ${Ssampah}\n━━━━━━━━━━━━━━━━━\n━━━━━━━━━━━━━━━━━\n\n
+
+
+➕ ${usedPrefix}shop <Buy|sell> <item> <jumlah>\n
+➕ Contoh penggunaan: *${usedPrefix}shop buy potion 1*
+
+😢 Jika error silahkan teliti command nya lagi!!
+🔍 Contoh Command :
+➖ .shop buy diamond 5
+➖ .shop sell diamond 5
+
+_©Recode By Pilar_
+
+
 `.trim()
     try {
         if (/shop|toko/i.test(command)) {
             const count = args[2] && args[2].length > 0 ? Math.min(99999999, Math.max(parseInt(args[2]), 1)) : !args[2] || args.length < 4 ? 1 :Math.min(1, count)
-            const sampah = global.DATABASE._data.users[m.sender].sampah
+            const sampah = global.DATABASE.data.users[m.sender].sampah
             switch (jualbeli) {
             case 'buy':
                 switch (_type) {
+                     case 'stone':
+                            if (global.DATABASE.data.users[m.sender].money >= Stone * count) {
+                                global.DATABASE.data.users[m.sender].money -= Stone * count
+                                global.DATABASE.data.users[m.sender].stone += count * 1
+                                conn.reply(m.chat, `Sukses Membeli ${count} Stone Dengan Harga ${Stone * count} money`, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Stone Dengan Harga ${Stone * count} Money `,)
+                        break
                     case 'potion':
-                            if (global.DATABASE._data.users[m.sender].money >= potion * count) {
-                                global.DATABASE._data.users[m.sender].money -= potion * count
-                                global.DATABASE._data.users[m.sender].potion += count * 1
-                                conn.reply(m.chat, `Succes membeli ${count} Potion dengan harga ${potion * count} money\n\nGunakan potion dengan ketik: *${usedPrefix}use potion <jumlah>*`, m)
-                            } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Potion dengan harga ${potion * count} money`,)
+                            if (global.DATABASE.data.users[m.sender].money >= potion * count) {
+                                global.DATABASE.data.users[m.sender].money -= potion * count
+                                global.DATABASE.data.users[m.sender].potion += count * 1
+                                conn.reply(m.chat, `Sukses Membeli ${count} Potion Dengan Harga ${potion * count} money\n\nGunakan Potion Dengan Ketik: *${usedPrefix}use potion <jumlah>*`, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Potion Dengan Harga ${potion * count} Money `,)
                         break
                     case 'diamond':
-                            if (global.DATABASE._data.users[m.sender].money >= Bdiamond * count) {
-                                global.DATABASE._data.users[m.sender].diamond += count * 1
-                                global.DATABASE._data.users[m.sender].money -= Bdiamond * count
-                                conn.reply(m.chat, `Succes membeli ${count} Diamond dengan harga ${Bdiamond * count} money`, m)
-                            } else conn.reply(m.chat, `Money anda tidak cukup`, m)
+                            if (global.DATABASE.data.users[m.sender].money >= Bdiamond * count) {
+                                global.DATABASE.data.users[m.sender].diamond += count * 1
+                                global.DATABASE.data.users[m.sender].money -= Bdiamond * count
+                                conn.reply(m.chat, `Sukses Membeli ${count} Diamond Dengan Harga ${Bdiamond * count} Money`, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup`, m)
                         
                         break
+
                     case 'common':
-                            if (global.DATABASE._data.users[m.sender].money >= Bcommon * count) {
-                                global.DATABASE._data.users[m.sender].common += count * 1
-                                global.DATABASE._data.users[m.sender].money -= Bcommon * count
-                                conn.reply(m.chat, `Succes membeli ${count} Common crate dengan harga ${Bcommon * count} money`, m)
-                            } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Common crate dengan harga ${Bcommon * count} money\n\nBuka crate dengan ketik: *${usedPrefix}open common*`, m)
+                            if (global.DATABASE.data.users[m.sender].money >= Bcommon * count) {
+                                global.DATABASE.data.users[m.sender].common += count * 1
+                                global.DATABASE.data.users[m.sender].money -= Bcommon * count
+                                conn.reply(m.chat, `Sukses Membeli ${count} Common Crate Dengan Harga ${Bcommon * count} Money`, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Common Crate Dengan Harga ${Bcommon * count} Money \n\nBuka Crate Dengan Ketik: *${usedPrefix}open common*`, m)
                         
                         break
                     case 'uncommon':
-                            if (global.DATABASE._data.users[m.sender].money >= Buncommon * count) {
-                                global.DATABASE._data.users[m.sender].uncommon += count * 1
-                                global.DATABASE._data.users[m.sender].money -= Buncommon * count
-                                conn.reply(m.chat, `Succes membeli ${count} Uncommon crate dengan harga ${Buncommon * count} money`, m)
-                            } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Uncommon crate dengan harga ${Buncommon * count} money\n\nBuka crate dengan ketik: *${usedPrefix}open uncommon*`, m)
+                            if (global.DATABASE.data.users[m.sender].money >= Buncommon * count) {
+                                global.DATABASE.data.users[m.sender].uncommon += count * 1
+                                global.DATABASE.data.users[m.sender].money -= Buncommon * count
+                                conn.reply(m.chat, `Sukses Membeli ${count} Uncommon Crate Dengan Harga ${Buncommon * count} Money`, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Uncommon Crate Dengan Harga ${Buncommon * count} Money \n\nBuka Crate Dengan Ketik: *${usedPrefix}open uncommon*`, m)
                         
                         break
                     case 'mythic':
-                            if (global.DATABASE._data.users[m.sender].money >= Bmythic * count) {
-                                    global.DATABASE._data.users[m.sender].mythic += count * 1
-                                global.DATABASE._data.users[m.sender].money -= Bmythic * count
-                                conn.reply(m.chat, `Succes membeli ${count} Mythic crate dengan harga ${Bmythic * count} money`, m)
-                            } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Mythic crate dengan harga ${Bmythic* count} money\n\nBuka crate dengan ketik: *${usedPrefix}open mythic*`, m)
+                            if (global.DATABASE.data.users[m.sender].money >= Bmythic * count) {
+                                    global.DATABASE.data.users[m.sender].mythic += count * 1
+                                global.DATABASE.data.users[m.sender].money -= Bmythic * count
+                                conn.reply(m.chat, `Sukses Membeli ${count} Mythic Crate Dengan Harga ${Bmythic * count} Money`, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Mythic Crate Dengan Harga ${Bmythic* count} Money\n\nBuka Crate Dengan Ketik:*${usedPrefix}open mythic*`, m)
                         
                         break
                     case 'legendary':
-                            if (global.DATABASE._data.users[m.sender].money >= Blegendary * count) {
-                                global.DATABASE._data.users[m.sender].legendary += count * 1
-                                global.DATABASE._data.users[m.sender].money -= Blegendary * count
-                                conn.reply(m.chat, `Succes membeli ${count} Legendary crate dengan harga ${Blegendary * count} money`, m)
-                            } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Legendary crate dengan harga ${Blegendary * count} money\n\nBuka crate dengan ketik: *${usedPrefix}open legendary*`, m)
+                            if (global.DATABASE.data.users[m.sender].money >= Blegendary * count) {
+                                global.DATABASE.data.users[m.sender].legendary += count * 1
+                                global.DATABASE.data.users[m.sender].money -= Blegendary * count
+                                conn.reply(m.chat, `Sukses Membeli ${count} Legendary Crate Dengan Harga ${Blegendary * count} Money`, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Legendary Crate Dengan Harga ${Blegendary * count} Money \n\nBuka Crate Dengan Ketik: *${usedPrefix}open legendary*`, m)
                         
                         break
                     case 'sampah':
-                            if (global.DATABASE._data.users[m.sender].money >= Bsampah * count) {
-                                global.DATABASE._data.users[m.sender].sampah += count * 1
-                                global.DATABASE._data.users[m.sender].money -= Bsampah * count
-                                conn.reply(m.chat, `Succes membeli ${count} Sampah dengan harga ${Bsampah * count} money`, m)
-                            } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Sampah dengan harga ${Bsampah * count} money`.trim(), m)
+                            if (global.DATABASE.data.users[m.sender].money >= Bsampah * count) {
+                                global.DATABASE.data.users[m.sender].sampah += count * 1
+                                global.DATABASE.data.users[m.sender].money -= Bsampah * count
+                                conn.reply(m.chat, `Sukses Membeli ${count} Sampah Dengan Harga ${Bsampah * count} Money `, m)
+                            } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Sampah Dengan Harga ${Bsampah * count} Money`.trim(), m)
                         
                         break
                     case 'armor':
-                            if (global.DATABASE._data.users[m.sender].armor == 5) return conn.reply(m.chat, 'Armormu sudah *Level Max*', m)
-                            if (global.DATABASE._data.users[m.sender].money > armor) {
-                                global.DATABASE._data.users[m.sender].armor += 1
-                                global.DATABASE._data.users[m.sender].money -= armor * 1
-                                conn.reply(m.chat, `Succes membeli armor seharga ${armor} money` ,m)
-                            } else conn.reply(m.chat, `uang mu tidak cukup untuk membeli armor seharga ${armor} money`, m)
+                            if (global.DATABASE.data.users[m.sender].armor == 5) return conn.reply(m.chat, 'Armormu sudah *Level Max*', m)
+                            if (global.DATABASE.data.users[m.sender].money > armor) {
+                                global.DATABASE.data.users[m.sender].armor += 1
+                                global.DATABASE.data.users[m.sender].money -= armor * 1
+                                conn.reply(m.chat, `Sukses Membeli Armor Seharga ${armor} Money` ,m)
+                            } else conn.reply(m.chat, `Uang Mu Tidak Cukup Untuk Membeli Armor Seharga ${armor} Money`, m)
                         
                         break
                     default:
@@ -118,54 +139,61 @@ Sampah:     ${Ssampah}\n\n
                 break
             case 'sell': 
                 switch (_type) {
+                    case 'stone':
+                        if (global.DATABASE.data.users[m.sender].stone >= count * 1) {
+                            global.DATABASE.data.users[m.sender].money += stone * count
+                            global.DATABASE.data.users[m.sender].stone -= count * 1
+                            conn.reply(m.chat, `Sukses Menjual ${count} Stone Dengan Harga ${stone * count} Money `.trim(), m)
+                        } else conn.reply(m.chat, `Stone Kamu Tidak Cukup`.trim(), m)
+                        break
                     case 'potion':
-                        if (global.DATABASE._data.users[m.sender].potion >= count * 1) {
-                            global.DATABASE._data.users[m.sender].money += Spotion * count
-                            global.DATABASE._data.users[m.sender].potion -= count * 1
-                            conn.reply(m.chat, `Succes menjual ${count} Potion dengan harga ${Spotion * count} money`.trim(), m)
-                        } else conn.reply(m.chat, `Potion kamu tidak cukup`.trim(), m)
+                        if (global.DATABASE.data.users[m.sender].potion >= count * 1) {
+                            global.DATABASE.data.users[m.sender].money += Spotion * count
+                            global.DATABASE.data.users[m.sender].potion -= count * 1
+                            conn.reply(m.chat, `Sukses Menjual ${count} Potion Dengan Harga ${Spotion * count} Money `.trim(), m)
+                        } else conn.reply(m.chat, `Potion Kamu Tidak Cukup`.trim(), m)
                         break
                     case 'common':
-                        if (global.DATABASE._data.users[m.sender].common >= count * 1) {
-                            global.DATABASE._data.users[m.sender].money += Scommon * count
-                            global.DATABASE._data.users[m.sender].common -= count * 1
-                            conn.reply(m.chat, `Succes menjual ${count} Common Crate dengan harga ${Scommon * count} money`.trim(), m)
-                        } else conn.reply(m.chat, `Common Crate kamu tidak cukup`.trim(), m)
+                        if (global.DATABASE.data.users[m.sender].common >= count * 1) {
+                            global.DATABASE.data.users[m.sender].money += Scommon * count
+                            global.DATABASE.data.users[m.sender].common -= count * 1
+                            conn.reply(m.chat, `Sukses Menjual ${count} Common Crate Dengan Harga ${Scommon * count} Money`.trim(), m)
+                        } else conn.reply(m.chat, `Common Crate Kamu Tidak Cukup`.trim(), m)
                         break
                     case 'uncommon':
-                        if (global.DATABASE._data.users[m.sender].uncommon >= count * 1) {
-                            global.DATABASE._data.users[m.sender].money += Suncommon * count
-                            global.DATABASE._data.users[m.sender].uncommon -= count * 1
-                            conn.reply(m.chat, `Succes menjual ${count} Uncommon Crate dengan harga ${Suncommon * count} money`.trim(), m)
-                        } else conn.reply(m.chat, `Uncommon Crate kamu tidak cukup`.trim(), m)
+                        if (global.DATABASE.data.users[m.sender].uncommon >= count * 1) {
+                            global.DATABASE.data.users[m.sender].money += Suncommon * count
+                            global.DATABASE.data.users[m.sender].uncommon -= count * 1
+                            conn.reply(m.chat, `Sukses Menjual ${count} Uncommon Crate Dengan Harga ${Suncommon * count} Money`.trim(), m)
+                        } else conn.reply(m.chat, `Uncommon Crate Kamu Tidak Cukup`.trim(), m)
                         break
                     case 'mythic':
-                        if (global.DATABASE._data.users[m.sender].mythic >= count * 1) {
-                            global.DATABASE._data.users[m.sender].money += Smythic * count
-                            global.DATABASE._data.users[m.sender].mythic -= count * 1
-                            conn.reply(m.chat, `Succes menjual ${count} Mythic Crate dengan harga ${Smythic * count} money`.trim(), m)
-                        } else conn.reply(m.chat, `Mythic Crate kamu tidak cukup`.trim(), m)
+                        if (global.DATABASE.data.users[m.sender].mythic >= count * 1) {
+                            global.DATABASE.data.users[m.sender].money += Smythic * count
+                            global.DATABASE.data.users[m.sender].mythic -= count * 1
+                            conn.reply(m.chat, `Sukses Menjual ${count} Mythic Crate Dengan Harga ${Smythic * count} Money`.trim(), m)
+                        } else conn.reply(m.chat, `Mythic Crate Kamu Tidak Cukup `.trim(), m)
                         break
                     case 'legendary':
-                        if (global.DATABASE._data.users[m.sender].legendary >= count * 1) {
-                            global.DATABASE._data.users[m.sender].money += Slegendary * count
-                            global.DATABASE._data.users[m.sender].legendary -= count * 1
-                            conn.reply(m.chat, `Succes menjual ${count} Legendary Crate dengan harga ${Slegendary * count} money`.trim(), m)
-                        } else conn.reply(m.chat, `Legendary Crate kamu tidak cukup`.trim(), m)
+                        if (global.DATABASE.data.users[m.sender].legendary >= count * 1) {
+                            global.DATABASE.data.users[m.sender].money += Slegendary * count
+                            global.DATABASE.data.users[m.sender].legendary -= count * 1
+                            conn.reply(m.chat, `Sukses Menjual ${count} Legendary Crate Dengan Harga ${Slegendary * count} Money `.trim(), m)
+                        } else conn.reply(m.chat, `Legendary Crate Kamu Tidak Cukup `.trim(), m)
                         break
                     case 'sampah':
-                        if (global.DATABASE._data.users[m.sender].sampah >= count * 1) {
-                            global.DATABASE._data.users[m.sender].sampah -= count * 1
-                            global.DATABASE._data.users[m.sender].money += Ssampah * count
-                            conn.reply(m.chat, `Succes menjual ${count} sampah, dan anda mendapatkan ${Ssampah * count} money`, m)
-                        } else conn.reply(m.chat, `Sampah anda tidak cukup`, m)
+                        if (global.DATABASE.data.users[m.sender].sampah >= count * 1) {
+                            global.DATABASE.data.users[m.sender].sampah -= count * 1
+                            global.DATABASE.data.users[m.sender].money += Ssampah * count
+                            conn.reply(m.chat, `Sukses Menjual ${count} Sampah , Dan Anda Mendapatkan ${Ssampah * count} Money `, m)
+                        } else conn.reply(m.chat, `Sampah Anda Tidak Cukup `, m)
                         break
                     case 'diamond':
-                        if (global.DATABASE._data.users[m.sender].diamond >= count * 1) {
-                            global.DATABASE._data.users[m.sender].diamond -= count * 1
-                            global.DATABASE._data.users[m.sender].money += Sdiamond * count
-                            conn.reply(m.chat, `Succes menjual ${count} Diamond, dan anda mendapatkan ${Sdiamond * count} money`, m)
-                        } else conn.reply(m.chat, `Diamond anda tidak cukup`, m)
+                        if (global.DATABASE.data.users[m.sender].diamond >= count * 1) {
+                            global.DATABASE.data.users[m.sender].diamond -= count * 1
+                            global.DATABASE.data.users[m.sender].money += Sdiamond * count
+                            conn.reply(m.chat, `Sukses Menjual ${count} Diamond, Dan Anda Mendapatkan ${Sdiamond * count} Money `, m)
+                        } else conn.reply(m.chat, `Diamond Anda Tidak Cukup `, m)
                         break
                     default:
                         return conn.reply(m.chat, Kchat, m)
@@ -178,69 +206,69 @@ Sampah:     ${Ssampah}\n\n
             const count = args[1] && args[1].length > 0 ? Math.min(99999999, Math.max(parseInt(args[1]), 1)) : !args[1] || args.length < 3 ? 1 : Math.min(1, count)
             switch (type) {
                 case 'potion':
-                        if (global.DATABASE._data.users[m.sender].money >= potion * count) {
-                            global.DATABASE._data.users[m.sender].money -= potion * count
-                            global.DATABASE._data.users[m.sender].potion += count * 1
-                            conn.reply(m.chat, `Succes membeli ${count} Potion dengan harga ${potion * count} money\n\nGunakan potion dengan ketik: *${usedPrefix}use potion <jumlah>*`, m)
-                        } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Potion dengan harga ${potion * count} money`,m)
+                        if (global.DATABASE.data.users[m.sender].money >= potion * count) {
+                            global.DATABASE.data.users[m.sender].money -= potion * count
+                            global.DATABASE.data.users[m.sender].potion += count * 1
+                            conn.reply(m.chat, `Sukses membeli ${count} Potion Dengan Harga ${potion * count} Money \n\nGunakan Potion Dengan Ketik: *${usedPrefix}use potion <jumlah>*`, m)
+                        } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Potion Dengan Harga ${potion * count} Money`,m)
                     
                     break
                 case 'diamond':
-                        if (global.DATABASE._data.users[m.sender].money >= Bdiamond * count) {
-                            global.DATABASE._data.users[m.sender].diamond += count * 1
-                            global.DATABASE._data.users[m.sender].money -= Bdiamond * count
-                            conn.reply(m.chat, `Succes membeli ${count} Diamond dengan harga ${Bdiamond * count} money`, m)
-                        } else conn.reply(m.chat, `Money anda tidak cukup`, m)
+                        if (global.DATABASE.data.users[m.sender].money >= Bdiamond * count) {
+                            global.DATABASE.data.users[m.sender].diamond += count * 1
+                            global.DATABASE.data.users[m.sender].money -= Bdiamond * count
+                            conn.reply(m.chat, `Sukses Membeli ${count} Diamond Dengan Harga ${Bdiamond * count} Money `, m)
+                        } else conn.reply(m.chat, `Money Anda Tidak Cukup `, m)
                     
                     break
                 case 'common':
-                        if (global.DATABASE._data.users[m.sender].money >= Bcommon * count) {
-                            global.DATABASE._data.users[m.sender].common += count * 1
-                            global.DATABASE._data.users[m.sender].money -= Bcommon * count
-                            conn.reply(m.chat, `Succes membeli ${count} Common crate dengan harga ${Bcommon * count} money`, m)
-                        } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Common crate dengan harga ${Bcommon * count} money\n\nBuka crate dengan ketik: *${usedPrefix}open common*`, m)
+                        if (global.DATABASE.data.users[m.sender].money >= Bcommon * count) {
+                            global.DATABASE.data.users[m.sender].common += count * 1
+                            global.DATABASE.data.users[m.sender].money -= Bcommon * count
+                            conn.reply(m.chat, `Sukses Membeli ${count} Common Crate Dengan Harga ${Bcommon * count} Money `, m)
+                        } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Common Crate Dengan Harga ${Bcommon * count} Money \n\nBuka Crate Dengan Ketik : *${usedPrefix}open common*`, m)
                     
                     break
                 case 'uncommon':
-                        if (global.DATABASE._data.users[m.sender].money >= Buncommon * count) {
-                            global.DATABASE._data.users[m.sender].uncommon += count * 1
-                            global.DATABASE._data.users[m.sender].money -= Buncommon * count
-                            conn.reply(m.chat, `Succes membeli ${count} Uncommon crate dengan harga ${Buncommon * count} money`, m)
-                        } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Uncommon crate dengan harga ${Buncommon * count} money\n\nBuka crate dengan ketik: *${usedPrefix}open uncommon*`, m)
+                        if (global.DATABASE.data.users[m.sender].money >= Buncommon * count) {
+                            global.DATABASE.data.users[m.sender].uncommon += count * 1
+                            global.DATABASE.data.users[m.sender].money -= Buncommon * count
+                            conn.reply(m.chat, `Sukses Membeli ${count} Uncommon Crate Dengan Harga ${Buncommon * count} Money `, m)
+                        } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Uncommon Crate Dengan Harga ${Buncommon * count} Money \n\nBuka Crate Dengan Ketik: *${usedPrefix}open uncommon*`, m)
                    
                     break
                 case 'mythic':
-                        if (global.DATABASE._data.users[m.sender].money >= Bmythic * count) {
-                            global.DATABASE._data.users[m.sender].mythic += count * 1
-                            global.DATABASE._data.users[m.sender].money -= Bmythic * count
-                            conn.reply(m.chat, `Succes membeli ${count} Mythic crate dengan harga ${Bmythic * count} money`, m)
-                        } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Mythic crate dengan harga ${Bmythic* count} money\n\nBuka crate dengan ketik: *${usedPrefix}open mythic*`, m)
+                        if (global.DATABASE.data.users[m.sender].money >= Bmythic * count) {
+                            global.DATABASE.data.users[m.sender].mythic += count * 1
+                            global.DATABASE.data.users[m.sender].money -= Bmythic * count
+                            conn.reply(m.chat, `Sukses Membeli ${count} Mythic Crate Dengan Harga ${Bmythic * count} Money `, m)
+                        } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Mythic Crate Dengan Harga ${Bmythic* count} money\n\nBuka Crate Dengan Ketik: *${usedPrefix}open mythic*`, m)
                     
                     break
                 case 'legendary':
-                        if (global.DATABASE._data.users[m.sender].money >= Blegendary * count) {
-                            global.DATABASE._data.users[m.sender].legendary += count * 1
-                            global.DATABASE._data.users[m.sender].money -= Blegendary * count
-                            conn.reply(m.chat, `Succes membeli ${count} Legendary crate dengan harga ${Blegendary * count} money`, m)
-                        } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Legendary crate dengan harga ${Blegendary * count} money\n\nBuka crate dengan ketik: *${usedPrefix}open legendary*`, m)
+                        if (global.DATABASE.data.users[m.sender].money >= Blegendary * count) {
+                            global.DATABASE.data.users[m.sender].legendary += count * 1
+                            global.DATABASE.data.users[m.sender].money -= Blegendary * count
+                            conn.reply(m.chat, `Sukses Membeli ${count} Legendary Crate Dengan Harga ${Blegendary * count} Money`, m)
+                        } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Legendary Crate Dengan Harga ${Blegendary * count} Money \n\nBuka Crate Dengan Ketik: *${usedPrefix}open legendary*`, m)
                     
                     break
                 case 'sampah':
-                        if (global.DATABASE._data.users[m.sender].money >= Bsampah * count) {
-                            global.DATABASE._data.users[m.sender].sampah += count * 1
-                            global.DATABASE._data.users[m.sender].money -= Bsampah * count
-                            conn.reply(m.chat, `Succes membeli ${count} Sampah dengan harga ${Bsampah * count} money`, m)
-                        } else conn.reply(m.chat, `Uang anda tidak cukup untuk membeli ${count} Sampah dengan harga ${Bsampah * count} money`.trim(), m)
+                        if (global.DATABASE.data.users[m.sender].money >= Bsampah * count) {
+                            global.DATABASE.data.users[m.sender].sampah += count * 1
+                            global.DATABASE.data.users[m.sender].money -= Bsampah * count
+                            conn.reply(m.chat, `Sukses Membeli ${count} Sampah Dengan Harga ${Bsampah * count} money`, m)
+                        } else conn.reply(m.chat, `Uang Anda Tidak Cukup Untuk Membeli ${count} Sampah Dengan Harga ${Bsampah * count} Money `.trim(), m)
                     
                     break
                 case 'armor':
-                        if (global.DATABASE._data.users[m.sender].armor == 5) return conn.reply(m.chat, 'Armormu sudah *Level Max*', m)
-                        if (global.DATABASE._data.users[m.sender].money > armor * 1) {
-                            global.DATABASE._data.users[m.sender].armor += 1
-                            global.DATABASE._data.users[m.sender].money -= armor * 1
-                            conn.reply(m.chat, `Succes membeli armor seharga ${armor} money` ,m)
+                        if (global.DATABASE.data.users[m.sender].armor == 5) return conn.reply(m.chat, 'Armormu Telah *Level Max*', m)
+                        if (global.DATABASE.data.users[m.sender].money > armor * 1) {
+                            global.DATABASE.data.users[m.sender].armor += 1
+                            global.DATABASE.data.users[m.sender].money -= armor * 1
+                            conn.reply(m.chat, `Sukses Membeli Armor Seharga ${armor} Money` ,m)
                           
-                        } else conn.reply(m.chat, `uang mu tidak cukup untuk membeli armor seharga ${armor} money`, m)
+                        } else conn.reply(m.chat, `Uang Mu Tidak Cukup Untuk Membeli Armor Seharga ${armor} Money`, m)
                     
                     break
                 default:
@@ -249,54 +277,61 @@ Sampah:     ${Ssampah}\n\n
         } else if (/sell|jual|/i.test(command)) {
             const count = args[1] && args[1].length > 0 ? Math.min(99999999, Math.max(parseInt(args[1]), 1)) : !args[1] || args.length < 3 ? 1 : Math.min(1, count)
             switch (type) {
+               case 'stone':
+                     if (global.DATABASE.data.users[m.sender].stone >= count * 1) {
+                         global.DATABASE.data.users[m.sender].money += Stone * count
+                         global.DATABASE.data.users[m.sender].stone -= count * 1
+                         conn.reply(m.chat, `Sukses Menjual ${count} Stone Dengan Harga ${Stone * count} Money`.trim(), m)
+                     } else conn.reply(m.chat, `Stone Kamu Tidak Cukup `.trim(), m)
+                     break
                 case 'potion':
-                    if (global.DATABASE._data.users[m.sender].potion >= count * 1) {
-                        global.DATABASE._data.users[m.sender].money += Spotion * count
-                        global.DATABASE._data.users[m.sender].potion -= count * 1
-                        conn.reply(m.chat, `Succes menjual ${count} Potion dengan harga ${Spotion * count} money`.trim(), m)
-                    } else conn.reply(m.chat, `Potion kamu tidak cukup`.trim(), m)
+                    if (global.DATABASE.data.users[m.sender].potion >= count * 1) {
+                        global.DATABASE.data.users[m.sender].money += Spotion * count
+                        global.DATABASE.data.users[m.sender].potion -= count * 1
+                        conn.reply(m.chat, `Sukses Menjual ${count} Potion Dengan Harga ${Spotion * count} Money`.trim(), m)
+                    } else conn.reply(m.chat, `Potion Kamu Tidak Cukup `.trim(), m)
                     break
                 case 'common':
-                    if (global.DATABASE._data.users[m.sender].common >= count * 1) {
-                        global.DATABASE._data.users[m.sender].money += Scommon * count
-                        global.DATABASE._data.users[m.sender].common -= count * 1
-                        conn.reply(m.chat, `Succes menjual ${count} Common Crate dengan harga ${Scommon * count} money`.trim(), m)
-                    } else conn.reply(m.chat, `Common Crate kamu tidak cukup`.trim(), m)
+                    if (global.DATABASE.data.users[m.sender].common >= count * 1) {
+                        global.DATABASE.data.users[m.sender].money += Scommon * count
+                        global.DATABASE.data.users[m.sender].common -= count * 1
+                        conn.reply(m.chat, `Sukses Menjual ${count} Common Crate Dengan Harga ${Scommon * count} Money`.trim(), m)
+                    } else conn.reply(m.chat, `Common Crate Kamu Tidak Cukup `.trim(), m)
                     break
                 case 'uncommon':
-                    if (global.DATABASE._data.users[m.sender].uncommon >= count * 1) {
-                        global.DATABASE._data.users[m.sender].money += Suncommon * count
-                        global.DATABASE._data.users[m.sender].uncommon -= count * 1
-                        conn.reply(m.chat, `Succes menjual ${count} Uncommon Crate dengan harga ${Suncommon * count} money`.trim(), m)
-                    } else conn.reply(m.chat, `Uncommon Crate kamu tidak cukup`.trim(), m)
+                    if (global.DATABASE.data.users[m.sender].uncommon >= count * 1) {
+                        global.DATABASE.data.users[m.sender].money += Suncommon * count
+                        global.DATABASE.data.users[m.sender].uncommon -= count * 1
+                        conn.reply(m.chat, `Sukses Menjual ${count} Uncommon Crate Dengan Harga ${Suncommon * count} Money`.trim(), m)
+                    } else conn.reply(m.chat, `Uncommon Crate Kamu Tidak Cukup`.trim(), m)
                     break
                 case 'mythic':
-                    if (global.DATABASE._data.users[m.sender].mythic >= count * 1) {
-                        global.DATABASE._data.users[m.sender].money += Smythic * count
-                        global.DATABASE._data.users[m.sender].mythic -= count * 1
-                        conn.reply(m.chat, `Succes menjual ${count} Mythic Crate dengan harga ${Smythic * count} money`.trim(), m)
-                    } else conn.reply(m.chat, `Mythic Crate kamu tidak cukup`.trim(), m)
+                    if (global.DATABASE.data.users[m.sender].mythic >= count * 1) {
+                        global.DATABASE.data.users[m.sender].money += Smythic * count
+                        global.DATABASE.data.users[m.sender].mythic -= count * 1
+                        conn.reply(m.chat, `Sukses Menjual ${count} Mythic Crate Dengan Harga ${Smythic * count} Money`.trim(), m)
+                    } else conn.reply(m.chat, `Mythic Crate Kamu Tidak Cukup `.trim(), m)
                     break
                 case 'legendary':
-                    if (global.DATABASE._data.users[m.sender].legendary >= count * 1) {
-                        global.DATABASE._data.users[m.sender].money += Slegendary * count
-                        global.DATABASE._data.users[m.sender].legendary -= count * 1
-                        conn.reply(m.chat, `Succes menjual ${count} Legendary Crate dengan harga ${Slegendary * count} money`.trim(), m)
-                    } else conn.reply(m.chat, `Legendary Crate kamu tidak cukup`.trim(), m)
+                    if (global.DATABASE.data.users[m.sender].legendary >= count * 1) {
+                        global.DATABASE.data.users[m.sender].money += Slegendary * count
+                        global.DATABASE.data.users[m.sender].legendary -= count * 1
+                        conn.reply(m.chat, `Sukses Menjual ${count} Legendary Crate Dengan Harga ${Slegendary * count} Money`.trim(), m)
+                    } else conn.reply(m.chat, `Legendary Crate Kamu Tidak Cukup`.trim(), m)
                     break
                 case 'sampah':
-                    if (global.DATABASE._data.users[m.sender].sampah >= count * 1) {
-                        global.DATABASE._data.users[m.sender].sampah -= count * 1
-                        global.DATABASE._data.users[m.sender].money += Ssampah * count
-                        conn.reply(m.chat, `Succes menjual ${count} sampah, dan anda mendapatkan ${Ssampah * count} money`.trim(), m)
-                    } else conn.reply(m.chat, `Sampah anda tidak cukup`.trim(), m)
+                    if (global.DATABASE.data.users[m.sender].sampah >= count * 1) {
+                        global.DATABASE.data.users[m.sender].sampah -= count * 1
+                        global.DATABASE.data.users[m.sender].money += Ssampah * count
+                        conn.reply(m.chat, `Sukses Menjual ${count} Sampah, Dan Anda Mendapatkan ${Ssampah * count} Money`.trim(), m)
+                    } else conn.reply(m.chat, `Sampah Anda Tidak Cukup`.trim(), m)
                     break
                 case 'diamond':
-                    if (global.DATABASE._data.users[m.sender].diamond >= count * 1) {
-                        global.DATABASE._data.users[m.sender].diamond -= count * 1
-                        global.DATABASE._data.users[m.sender].money += Sdiamond * count
-                        conn.reply(m.chat, `Succes menjual ${count} Diamond, dan anda mendapatkan ${Sdiamond * count} money`, m)
-                    } else conn.reply(m.chat, `Diamond anda tidak cukup`, m)
+                    if (global.DATABASE.data.users[m.sender].diamond >= count * 1) {
+                        global.DATABASE.data.users[m.sender].diamond -= count * 1
+                        global.DATABASE.data.users[m.sender].money += Sdiamond * count
+                        conn.reply(m.chat, `Sukses Menjual ${count} Diamond, Dan Anda Mendapatkan ${Sdiamond * count} Money`, m)
+                    } else conn.reply(m.chat, `Diamond Anda Tidak Cukup `, m)
                     break
                 default:
                     return conn.reply(m.chat, Kchat, m)
@@ -313,7 +348,7 @@ Sampah:     ${Ssampah}\n\n
     }
 }
 
-handler.help = ['shop <sell|buy> <args>', 'toko <sell|buy> <args>']
+handler.help = ['shop <sell|buy> <args>', 'toko <sell|buy> <args>', 'shop <jual|beli> <args>', 'toko <jual|beli> <args>']
 handler.tags = ['rpg']
     
 handler.command = /^(shop|toko|buy|beli|sell|jual)$/i
