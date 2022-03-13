@@ -4,7 +4,7 @@ let image2 = fs.readFileSync('./logo2.jpg')
 let image3 = fs.readFileSync('./logo5.jpg')
 global.DeveloperMode = 'false' //true Or false
 global.linkGC = ['https://chat.whatsapp.com/Ix8SHYHTYdB98ERHBUI2NA']
-global.owner = ['6289625556161','62896255561613'] // Letakan nomor kamu disini
+global.owner = ['6282287750102','6285799743965'] // Letakan nomor kamu disini
 global.mods = [] // Moderator?
 global.prems = JSON.parse(fs.readFileSync('./src/premium.json')) // Pengguna premium tidak memerlukan limit
 global.APIs = { // API Prefix
@@ -42,14 +42,14 @@ global.APIKeys = { // APIKey nya disini
 }
 
 // Sticker WM
-global.packname = 'ZeusBotz'
-global.author = 'Recode By Pilar'
+global.packname = 'Alpin-XD'
+global.author = 'Recode By Alpin'
 global.image = image1
 global.image2 = image2
 global.image3 = image3
 
 global.eror = 'Error 404'
-global.wait = '_Wait_'
+global.wait = '_*Wait Sedang Diproses*_'
 
 global.multiplier = 1000 // Semakin tinggi, semakin sulit naik level
 
